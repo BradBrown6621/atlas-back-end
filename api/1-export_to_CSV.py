@@ -5,10 +5,10 @@
 """
 
 
+import csv
 import json
 import sys
 import urllib.request
-import csv
 
 base = "https://jsonplaceholder.typicode.com/"
 
@@ -26,14 +26,15 @@ if __name__ == "__main__":
                 todo_data = response.read().decode()
             todos = json.loads(todo_data)
 
-            with open("{}.csv".format(employee_id), "w", newline='') as csvfile:
+            with open("{}.csv".format(employee_id),
+                      "w", newline='') as csvfile:
                 writer = csv.writer(csvfile, quotechar=None)
 
                 for todo in todos:
                     writer.writerow([
                         f'"{employee_id}"',
-                        f'"{username}"', 
-                        f'"{str(todo["completed"])}"', 
+                        f'"{username}"',
+                        f'"{str(todo["completed"])}"',
                         f'"{todo["title"]}"'
                         ])
         except Exception as e:
